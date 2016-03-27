@@ -1,8 +1,5 @@
 package kiloboltgame;
 
-/*
- * Enemy is a superclass for different enemy classes.
- * */
 public class Enemy {
 
 	private int maxHealth, currentHealth, power, speedX, centerX, centerY;

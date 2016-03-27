@@ -2,8 +2,9 @@ package kiloboltgame;
 
 public class Heliboy extends Enemy {
 
-	public Heliboy() {
-		// TODO Auto-generated constructor stub
+	public Heliboy(int centerX, int centerY) {
+		setCenterX(centerX);
+		setCenterY(centerY);
 	}
 
 }

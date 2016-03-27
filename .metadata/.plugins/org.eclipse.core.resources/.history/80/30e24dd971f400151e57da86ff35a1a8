@@ -13,13 +13,11 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 
 	private static Background bg1, bg2;
 	private Robot robot;
-	private Heliboy hb, hb2;
-	private Image image, character, characterDown, characterJumped, heliboy,
-			background, currentSprite;
+	private Image image, character, characterDown, characterJumped, background,
+			currentSprite;
 	private URL base;
 	private Graphics second;
 
-	//Variables initialized when game is started.
 	@Override
 	public void init() {
 		setSize(800, 480);
@@ -42,16 +40,12 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 		characterJumped = getImage(base, "data/jumped.png");
 		currentSprite = character;
 		background = getImage(base, "data/background.png");
-		heliboy = getImage(base, "data/heliboy.png");
 	}
 
-	//Creating class instances when game is started.
 	@Override
 	public void start() {
 		bg1 = new Background(0, 0);
 		bg2 = new Background(2160, 0);
-		hb = new Heliboy(340, 360);
-		hb2 = new Heliboy(700, 360);
 		robot = new Robot();
 		Thread thread = new Thread(this);
 		thread.start();
@@ -69,9 +63,6 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 		super.destroy();
 	}
 
-	//The game-loop. Called repeatedly to update movement and other game stats.
-	//The while loop runs about 60 times per second (see Thread.sleep(17)).
-	//Every element is drawn each time.
 	@Override
 	public void run() {
 		while (true) {
@@ -81,8 +72,6 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 			} else if (robot.isJumped() == false && robot.isDucked() == false) {
 				currentSprite = character;
 			}
-			hb.update();
-			hb2.update();
 			bg1.update();
 			bg2.update();
 			repaint();
@@ -109,15 +98,12 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 		g.drawImage(image, 0, 0, this);
 	}
 
-	//Draws the elements. The background, the robot and the enemies.
 	@Override
 	public void paint(Graphics g) {
 		g.drawImage(background, bg1.getBgX(), bg1.getBgY(), this);
 		g.drawImage(background, bg2.getBgX(), bg2.getBgY(), this);
 		g.drawImage(currentSprite, robot.getCenterX() - 61,
 				robot.getCenterY() - 63, this);
-		g.drawImage(heliboy, hb.getCenterX() - 48, hb.getCenterY() - 48, this);
-		g.drawImage(heliboy, hb2.getCenterX() - 48, hb2.getCenterY() - 48, this);
 	}
 
 	@Override
@@ -126,8 +112,6 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 
 	}
 
-	//Takes care of input from user and calls
-	//appropriate functions, when keys are pressed.
 	@Override
 	public void keyPressed(KeyEvent e) {
 
@@ -162,8 +146,6 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 
 	}
 
-	//Takes care of input from user and calls
-	//appropriate functions, when keys are released.
 	@Override
 	public void keyReleased(KeyEvent e) {
 		switch (e.getKeyCode()) {

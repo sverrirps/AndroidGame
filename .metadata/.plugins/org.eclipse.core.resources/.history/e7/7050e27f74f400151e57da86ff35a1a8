@@ -1,9 +1,5 @@
 package kiloboltgame;
 
-/*
- * Background class, takes care of the background, the location
- * and the movement.
- * */
 public class Background {
 
 	private int bgX, bgY, speedX;

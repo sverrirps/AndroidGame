@@ -13,8 +13,7 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 
 	private static Background bg1, bg2;
 	private Robot robot;
-	private Image image, character, characterDown, characterJumped, background,
-			currentSprite;
+	private Image image, character, background;
 	private URL base;
 	private Graphics second;
 
@@ -36,9 +35,6 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 
 		// Image Setups
 		character = getImage(base, "data/character.png");
-		characterDown = getImage(base, "data/down.png");
-		characterJumped = getImage(base, "data/jumped.png");
-		currentSprite = character;
 		background = getImage(base, "data/background.png");
 	}
 
@@ -67,11 +63,6 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 	public void run() {
 		while (true) {
 			robot.update();
-			if (robot.isJumped()) {
-				currentSprite = characterJumped;
-			} else if (robot.isJumped() == false && robot.isDucked() == false) {
-				currentSprite = character;
-			}
 			bg1.update();
 			bg2.update();
 			repaint();
@@ -102,7 +93,7 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 	public void paint(Graphics g) {
 		g.drawImage(background, bg1.getBgX(), bg1.getBgY(), this);
 		g.drawImage(background, bg2.getBgX(), bg2.getBgY(), this);
-		g.drawImage(currentSprite, robot.getCenterX() - 61,
+		g.drawImage(character, robot.getCenterX() - 61,
 				robot.getCenterY() - 63, this);
 	}
 

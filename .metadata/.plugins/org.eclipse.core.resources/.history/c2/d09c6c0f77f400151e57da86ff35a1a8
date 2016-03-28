@@ -1,6 +1,6 @@
 package kiloboltgame;
 
-import java.util.ArrayList;
+import java.awt.Graphics;
 
 /*
  * Robot is a class for the main character, which acts according
@@ -19,16 +19,12 @@ public class Robot {
 	private boolean movingLeft = false;
 	private boolean movingRight = false;
 	private boolean ducked = false;
-	
 	private static Background bg1 = StartingClass.getBg1();
 	private static Background bg2 = StartingClass.getBg2();
-	
 	private int speedX = 0;
 	private int speedY = 1;
-	
-	private ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 
-	// Repeatedly called to update character's position and movement.
+	//Repeatedly called to update character's position and movement.
 	public void update() {
 
 		// Moves Character or Scrolls Background accordingly.
@@ -105,6 +101,7 @@ public class Robot {
 		if (isMovingRight() == true && isMovingLeft() == false) {
 			moveRight();
 		}
+
 	}
 
 	public void jump() {
@@ -112,13 +109,7 @@ public class Robot {
 			speedY = JUMPSPEED;
 			jumped = true;
 		}
-	}
 
-	//The bullet is located 50 pixels to the right and 25 pixels
-	//above the center of the robot, where the gun is.
-	public void shoot() {
-		Projectile p = new Projectile(centerX + 50, centerY - 25);
-		projectiles.add(p);
 	}
 
 	public int getCenterX() {
@@ -185,7 +176,4 @@ public class Robot {
 		this.movingLeft = movingLeft;
 	}
 
-	public ArrayList getProjectiles() {
-		return projectiles;
-	}
 }

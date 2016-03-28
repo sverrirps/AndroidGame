@@ -8,7 +8,6 @@ import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.net.URL;
-import java.util.ArrayList;
 
 public class StartingClass extends Applet implements Runnable, KeyListener {
 
@@ -20,7 +19,7 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 	private URL base;
 	private Graphics second;
 
-	// Variables initialized when game is started.
+	//Variables initialized when game is started.
 	@Override
 	public void init() {
 		setSize(800, 480);
@@ -46,7 +45,7 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 		heliboy = getImage(base, "data/heliboy.png");
 	}
 
-	// Creating class instances when game is started.
+	//Creating class instances when game is started.
 	@Override
 	public void start() {
 		bg1 = new Background(0, 0);
@@ -70,9 +69,9 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 		super.destroy();
 	}
 
-	// The game-loop. Called repeatedly to update movement and other game stats.
-	// The while loop runs about 60 times per second (see Thread.sleep(17)).
-	// Every element is drawn each time.
+	//The game-loop. Called repeatedly to update movement and other game stats.
+	//The while loop runs about 60 times per second (see Thread.sleep(17)).
+	//Every element is drawn each time.
 	@Override
 	public void run() {
 		while (true) {
@@ -82,17 +81,6 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 			} else if (robot.isJumped() == false && robot.isDucked() == false) {
 				currentSprite = character;
 			}
-
-			ArrayList projectiles = robot.getProjectiles();
-			for (int i = 0; i < projectiles.size(); i++) {
-				Projectile p = (Projectile) projectiles.get(i);
-				if (p.isVisible() == true) {
-					p.update();
-				} else {
-					projectiles.remove(i);
-				}
-			}
-
 			hb.update();
 			hb2.update();
 			bg1.update();
@@ -121,17 +109,11 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 		g.drawImage(image, 0, 0, this);
 	}
 
-	// Draws the elements. The background, the robot and the enemies.
+	//Draws the elements. The background, the robot and the enemies.
 	@Override
 	public void paint(Graphics g) {
 		g.drawImage(background, bg1.getBgX(), bg1.getBgY(), this);
 		g.drawImage(background, bg2.getBgX(), bg2.getBgY(), this);
-		ArrayList projectiles = robot.getProjectiles();
-		for (int i = 0; i < projectiles.size(); i++) {
-			Projectile p = (Projectile) projectiles.get(i);
-			g.setColor(Color.YELLOW);
-			g.fillRect(p.getX(), p.getY(), 10, 5);
-		}
 		g.drawImage(currentSprite, robot.getCenterX() - 61,
 				robot.getCenterY() - 63, this);
 		g.drawImage(heliboy, hb.getCenterX() - 48, hb.getCenterY() - 48, this);
@@ -144,8 +126,8 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 
 	}
 
-	// Takes care of input from user and calls
-	// appropriate functions, when keys are pressed.
+	//Takes care of input from user and calls
+	//appropriate functions, when keys are pressed.
 	@Override
 	public void keyPressed(KeyEvent e) {
 
@@ -176,18 +158,12 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 			robot.jump();
 			break;
 
-		case KeyEvent.VK_CONTROL:
-			if (robot.isDucked() == false && robot.isJumped() == false) {
-				robot.shoot();
-			}
-			break;
-
 		}
 
 	}
 
-	// Takes care of input from user and calls
-	// appropriate functions, when keys are released.
+	//Takes care of input from user and calls
+	//appropriate functions, when keys are released.
 	@Override
 	public void keyReleased(KeyEvent e) {
 		switch (e.getKeyCode()) {

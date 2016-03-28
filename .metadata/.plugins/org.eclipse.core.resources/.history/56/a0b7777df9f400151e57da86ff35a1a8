@@ -18,7 +18,7 @@ import kiloboltgame.framework.Animation;
 public class StartingClass extends Applet implements Runnable, KeyListener {
 
 	private static Background bg1, bg2;
-	private static Robot robot;
+	private Robot robot;
 	private Heliboy hb, hb2;
 	private Image image, character, character2, character3, characterDown,
 			characterJumped, heliboy, heliboy2, heliboy3, heliboy4, heliboy5,
@@ -93,7 +93,6 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 	public void start() {
 		bg1 = new Background(0, 0);
 		bg2 = new Background(2160, 0);
-		robot = new Robot();
 		try {
 			loadMap("data/map1.txt");
 		} catch (IOException e) {
@@ -103,6 +102,7 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 
 		hb = new Heliboy(340, 360);
 		hb2 = new Heliboy(700, 360);
+		robot = new Robot();
 		Thread thread = new Thread(this);
 		thread.start();
 	}
@@ -132,6 +132,7 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 		for (int j = 0; j < 12; j++) {
 			String line = (String) lines.get(j);
 			for (int i = 0; i < width; i++) {
+				System.out.println(i + "is i ");
 
 				if (i < line.length()) {
 					char ch = line.charAt(i);
@@ -339,9 +340,5 @@ public class StartingClass extends Applet implements Runnable, KeyListener {
 
 	public static Background getBg2() {
 		return bg2;
-	}
-	
-	public static Robot getRobot(){
-		return robot;
 	}
 }
